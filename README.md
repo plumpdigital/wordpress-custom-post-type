@@ -1,7 +1,7 @@
 Wordpress Custom Post Helper
 =====================
 
-WordPress custom post type and meta box helper classes.
+WordPress custom post type and meta box helper classes from [Plump Digital](http://www.plumpdigital.co.uk)
 
 Include custom-post-type.php within your theme's functions.php or your plugin.
 
