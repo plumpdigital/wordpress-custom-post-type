@@ -147,7 +147,7 @@ class CustomPostType {
 	public function registerMetaBoxes() {
 		
 		foreach ($this->metaBoxes as $metabox) {
-			add_meta_box($metabox->id, $metabox->title, array($this, 'metaboxContent'), $this->postTypeName);
+			add_meta_box($metabox->id, $metabox->title, array($this, 'metaboxContent'), $this->postTypeName, $metabox->context);
 		}
 		
 	}
@@ -200,6 +200,7 @@ class MetaBox {
 	
 	public $id;
 	public $title;
+	public $context = 'advanced';
 	
 	private $fields = array();
 	
@@ -259,6 +260,10 @@ class MetaBox {
 	
 	public function outputLabel($label, $name) {
 		echo "<label for=\"$name\" style=\"float: left; width: 10em;\">$label</label>";
+	}
+	
+	public function setContext($context) {
+		$this->context = $context;
 	}
 	
 	private static function sanitize($name, $replace = '-') {
