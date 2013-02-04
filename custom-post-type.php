@@ -245,15 +245,29 @@ class MetaBox {
 
 	public function outputField($type, $name, $label, $value = null) {
 		$this->outputLabel($label, $name);
+		
+		if (is_array($type)) {
+			list($type, $typeOptions) = $type;
+		}
+		
 		switch ($type) {
 			case 'text':
-				echo "<input type=\"text\" id=\"$name\" name=\"custom_meta[$name]\" value=\"$value\" size=\"50\" />";
+				$size = ($this->context == 'side' ? 40 : 50);
+				echo "<input type=\"text\" id=\"$name\" name=\"custom_meta[$name]\" value=\"$value\" size=\"$size\" />";
 				break;
 			case 'textarea':
 				echo "<textarea id=\"$name\" name=\"custom_meta[$name]\" cols=\"50\" rows=\"5\">$value</textarea>"; 
 				break;
 			case 'checkbox':
 				echo "<input type=\"checkbox\" id=\"$name\" name=\"custom_meta[$name]\" value=\"1\"" . (($value == 1) ? ' checked="checked"' : '') . ' />'; 
+				break;
+			case 'select':
+				echo "<select id=\"$name\" name=\"custom_meta[$name]\">";
+				foreach ($typeOptions as $key => $option) {
+					$selected = ($key == $value);
+					echo "<option value=\"$key\"" . ($selected ? ' selected="selected"' : '') . ">$option</option>\n"; 
+				}
+				echo "</select>";
 				break;
 		}
 	}
