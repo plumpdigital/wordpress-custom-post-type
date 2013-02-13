@@ -109,8 +109,8 @@ class CustomPostType {
 	 * @param $title Title in human-readable format, e.g. Publisher Details
 	 * @param $fields Array of fields to add to the metabox
 	 */
-	public function addMetaBox($title, $fields) {
-		$this->addMetaboxObject(new MetaBox($title, $fields));
+	public function addMetaBox($title, $fields, $description = NULL) {
+		$this->addMetaboxObject(new MetaBox($title, $fields, $description));
 	}
 
 	public function addMetaboxObject($metaBox) {
@@ -200,15 +200,17 @@ class MetaBox {
 	
 	public $id;
 	public $title;
+	public $description;
 	public $context = 'advanced';
 	
 	private $fields = array();
 	
 	private $cols = array();
 	
-	public function __construct($title, $fields = array()) {
+	public function __construct($title, $fields = array(), $description = NULL) {
 		$this->id = self::sanitize($title);
 		$this->title = $title;
+		$this->description = $description;
 		$this->addFields($fields);
 	}
 	
@@ -226,6 +228,10 @@ class MetaBox {
 	}
 
 	public function output($values) {
+			
+		if ($this->description) {
+			echo '<p>' . $this->description . '</p>';
+		}
 			
 		echo '<div style="overflow:hidden">';
 		foreach ($this->cols as $fields) {
