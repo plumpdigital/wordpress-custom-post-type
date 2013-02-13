@@ -84,7 +84,7 @@ class CustomPostType {
 			    'update_item' 		=> __('Update ' . $name),
 			    'add_new_item' 		=> __('Add New ' . $name),
 			    'new_item_name' 	=> __('New ' . $name . ' Name'),
-			    'menu_name' 		=> __($name),
+			    'menu_name' 		=> $plural,
 			), $labels);
 			
 			//merge arguments with defaults
