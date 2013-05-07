@@ -215,7 +215,7 @@ class MetaBox {
 	}
 	
 	public function addFields($fields, $col = 0) {
-		if (is_array($this->cols[$col])) {
+		if (array_key_exists($col, $this->cols) && is_array($this->cols[$col])) {
 			$this->cols[$col] += $fields;
 		} else {
 			$this->cols[$col] = $fields;
